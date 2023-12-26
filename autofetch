@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+wget -T 15 -O playlist.m3u8 "http://81.211.33.93/hls-live4/streams/1tv-orbit-plus-4/1tv-orbit-plus-45.m3u8?cdn=https://edge1.1internet.tv&s=Onpk%2BTZr97U2W17iXPFkycG0cbRkNkYPVVDwPLf%2F5sgTwohj0HWKGEDMtNHTMxeRo7n0T8Qi%2FwJEMC2%2BNwNMFDb%2F7l19CzrmYvFZUr6yuF4%3D" --header "User-Agent: Wget/1.21.4"||exit 1
+a=($(cat playlist.m3u8|grep -i "\.ts"|tail -n 1|sed "s/\//\n/gI"|tail -n 1|sed "s/-/\n/gI"|tail -n 2))
+b=$(echo ${a[0]}|head -c 8|tail -c 2)
+c=$(echo ${a[0]}|head -c 11|tail -c 2)
+d=$(echo ${a[0]}|head -c 13|tail -c 2)
+e=$(echo ${a[0]}|head -c 15|tail -c 2)
+f=$(echo ${a[1]}|sed "s/_/\n/gI;s/\./\n/gI"|head -n 2|tail -n 1)
+./download.sh $b $c $d $e $f
