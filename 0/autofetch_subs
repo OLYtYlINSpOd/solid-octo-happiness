@@ -1,1 +1,10 @@
-
+#!/usr/bin/bash
+a=playlist.m3u8
+b="http://87.239.27.170"
+wget -T 15 -O $a --header "Host: mhd158.iptv2022.com" "$b/p/Bh0oq1H765lrpWAwBFrbqw,1703786348/streaming/1kanalplus4/324/5/tracks-v5a1/mono.m3u8"||exit 1
+d=($(cat $a|grep -i "\.ts"|tail -n 1|sed "s/\// /gI;s/-/ /gI"))
+e=${d[3]}
+f=${d[4]}
+g=${d[5]}
+h=${d[2]}
+./download_with_subs.sh $e $f $g $h
